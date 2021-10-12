@@ -1,21 +1,48 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import HelloWorld from './components/HelloWorld.vue'
+import { numberInput, calculationInput, isNumberValidCalculation } from './state'
+import { calculationSelections } from './utils'
 </script>
 
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Hello Vue 3 + TypeScript + Vite" />
+  <div class="main-container">
+    <div class="left">
+      <input type="number" v-model="numberInput">
+    </div>
+    <div class="middle">
+      <select v-model="calculationInput"> 
+        <option v-for="opt of calculationSelections" :value="opt" :key="opt">{{opt}}</option>
+      </select>
+    </div>
+    <div class="right">
+      <h1>{{isNumberValidCalculation}}</h1>
+    </div>
+  </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.main-container {
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  border: 1px solid black;
+  height: 95vh;
+}
+.left {
+  width: 200px;
+  box-sizing: border-box;
+  border: 1px solid green;
+  flex-shrink: 0;
+}
+.right {
+  width: 300px;
+  box-sizing: border-box;
+  border: 1px solid blue;
+  flex-shrink: 0;
+
+}
+.middle {
+  min-width: 100px;
+  flex-grow: 1;
 }
 </style>
